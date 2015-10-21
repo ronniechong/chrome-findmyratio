@@ -1,0 +1,13 @@
+#findMyRatioTooltip {
+  background: red;
+  color: white;
+  position: fixed;
+  padding: 0 2px;
+  font-size: 9px;
+  top: 0;
+  left: 0;
+  display: none;
+  z-index: 10; }
+
+#findMyRatioTooltip.active {
+  display: block; }

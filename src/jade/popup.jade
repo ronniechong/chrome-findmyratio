@@ -1,0 +1,25 @@
+html5
+    head
+        title Find My Ratio
+        link(rel="stylesheet" type="text/css" href="../css/main.css")
+    body
+        #form
+            .column--half
+                p Origin
+                .input--container
+                    label(for="sampleWidth") Width
+                    input(type="number" id="sampleWidth" name="sampleWidth")
+                .input--container
+                    label(for="sampleHeight") Height
+                    input(type="number" id="sampleHeight" name="sampleHeight")
+            .column--half
+                p Desired
+                .input--container
+                    label(for="outputWidth") Width
+                    input(type="number" id="outputWidth" name="outputWidth")
+                .input--container
+                    label(for="outputHeight") Height
+                    input(type="number" id="outputHeight" name="outputHeight")
+            .text--container
+                .ratio#outputRatio
+        script(src="../js/popup.js")

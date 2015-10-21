@@ -1,0 +1,34 @@
+{
+    "manifest_version": 2,
+
+    "name": "Find my ratio",
+    "description": "Find my ratio",
+    "version": "1.0",
+
+
+    "browser_action": {
+        "default_title": "Find My Ratio",
+        "default_icon": "icons/icon.png",
+        "default_popup": "html/popup.html"
+//        "default_icon": {
+//          "19": "images/icon19.png",           // optional
+//          "38": "images/icon38.png"            // optional
+//        }
+    },
+    "permissions": [
+      "activeTab"
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": ["js/content.js"]
+            //"css": ["css/main.css"]
+        }
+    ],
+  "background": {
+    "scripts": ["js/eventPage.js"],
+    "persistent": false
+  }
+}
