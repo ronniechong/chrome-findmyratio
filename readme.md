@@ -5,9 +5,9 @@ Work in progress chrome extension
 
 Run build
 
-'''
+```
 gulp
-'''
+```
 
 
 ## Todo
