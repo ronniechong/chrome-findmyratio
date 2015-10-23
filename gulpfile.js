@@ -3,57 +3,20 @@ var gulp        = require('gulp'),
                         pattern: ['gulp-*', 'gulp.*'],
                         replaceString: /\bgulp[\-.]/
                     }),
-    browserSync = require('browser-sync');
+    browserSync = require('browser-sync'),
+    config      = require('./gulp/config');
 
-gulp.task('sass', function() {
-    return gulp.src('src/scss/**/*.scss')
-        .pipe(plugins.sass({
-            outputStyle: 'development'
-        }).on('error', plugins.sass.logError))
-        .pipe(gulp.dest('build/css/'));
-});
+require(config.param.taskPath + config.sass.name)(gulp, plugins, config);
+require(config.param.taskPath + config.jade.name)(gulp, plugins, config);
+require(config.param.taskPath + config.javascript.name)(gulp, plugins, config);
+require(config.param.taskPath + config.jshint.name)(gulp, plugins, config);
+require(config.param.taskPath + config.watch.name)(gulp, plugins, config);
+require(config.param.taskPath + config.browsersync.name)(gulp, browserSync, config);
 
-gulp.task('watch', function() {
-    gulp.watch('src/jade/*.jade', ['jade']);
-    gulp.watch('src/js/*.js', ['jshint','js']);
-    gulp.watch('src/scss/**/*.scss', ['sass']);
-});
-
-gulp.task('jade', function () {
-    return gulp.src('src/jade/*.jade')
-        .pipe(plugins.jade({
-            pretty: true
-        }))
-        .pipe(gulp.dest('build/html/'))
-});
-
-gulp.task('js', function () {
-     return gulp.src('src/js/*.js')
-        .pipe(plugins.uglify())
-        .pipe(gulp.dest('build/js/'))
-});
-
-gulp.task('jshint', function() {
-    gulp.src('src/js/*.js')
-        .pipe(plugins.jshint())
-        .pipe(plugins.jshint.reporter('default'));
-});
-
-gulp.task('browser-sync', function () {
-    var files = [
-        'build/html/**/*.html',
-        'build/css/**/*.css',
-        'build/js/**/*.js'
-    ];
-
-    browserSync.init(files, {
-        server: {
-            baseDir: 'build/',
-            index: "html/popup.html"
-        }
-    });
-});
-
-
-gulp.task('default', ['jade','js','sass','browser-sync','watch']);
-gulp.task('distro', ['jade','js','sass']);
+gulp.task('default', [
+    config.jade.name,
+    config.javascript.name,
+    config.sass.name,
+    config.browsersync.name,
+    config.watch.name
+]);
